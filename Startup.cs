@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,21 +27,16 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Enable CORS
+            //Thêm Allow Cross Origin để tên miền (front end) fetch api dữ liệu của tên miền khác (.NET Core Web API) được
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader()
-                     .AllowAnyHeader());
+                // Thêm chính sách cho phép origin tất cả header
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader());
             });
 
 
-            //JSON Serializer
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
-                    .Json.ReferenceLoopHandling.Ignore)
-                    .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
-                    = new DefaultContractResolver());
+            //JSON Serializer ( Công cụ chuyển đổi dữ liệu object sang chuỗi Json
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddControllers();
         }
