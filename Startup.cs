@@ -58,6 +58,7 @@ namespace WebAPI
                 endpoints.MapControllers();
             });
 
+            // Lưu trữ file tĩnh trong thư mục gốc
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(

@@ -12,6 +12,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
+        // Đọc cấu hình từ file appsettings.json để kết nối Database
         private readonly IConfiguration _configuration;
 
         public DepartmentController(IConfiguration configuration)
